@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+package App.RPC.Service;
+import "result.proto";
+
+service RPCDemoService{
+	rpc Add(DemoRequest) returns (App.RPC.Model.Response){}  
+	rpc GetById(DemoId) returns (DemoRequest){}
+	rpc Get(Search) returns (DemoList){}
+}
+
+message DemoId{
+	int32 Id=1;
+}
+
+message Search{
+     int32 page=1;
+	 int32 size=2;
+	 string query=3;
+}
+
+message DemoRequest{
+	string Id=1;
+	int32 CommentId=2;
+	bool IsDeleted=3;
+}
+
+message DemoList{
+	repeated DemoRequest details = 1;
+}
+
+

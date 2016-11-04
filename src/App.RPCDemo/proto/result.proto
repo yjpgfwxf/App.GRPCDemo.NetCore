@@ -1,0 +1,6 @@
+﻿syntax = "proto3";
+package App.RPC.Model;
+message Response{
+    bool sucess=1;
+	string message=2;
+}

@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "App.RPC.Core": "1.0.0-*",
+    "App.RPCDemo": "1.0.0-*",
+    "Grpc.Core": "1.0.1-pre1",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    }
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dotnet5.6"
+    }
+  }
+}

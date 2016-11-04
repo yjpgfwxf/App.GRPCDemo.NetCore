@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6992AED5-5568-4FDA-917B-C314016FAF90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD54EA2B-D816-41DD-B79F-1E30FFDE0F8C}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.RPCDemo", "src\App.RPCDemo\App.RPCDemo.xproj", "{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.RPCDemoClient", "src\App.RPCDemoClient\App.RPCDemoClient.xproj", "{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.RPCDemoServer", "src\App.RPCDemoServer\App.RPCDemoServer.xproj", "{19BCE8B3-3CD6-4D79-B564-E9D96045C019}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.RPC.Core", "src\App.RPC.Core\App.RPC.Core.xproj", "{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BCE8B3-3CD6-4D79-B564-E9D96045C019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BCE8B3-3CD6-4D79-B564-E9D96045C019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BCE8B3-3CD6-4D79-B564-E9D96045C019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BCE8B3-3CD6-4D79-B564-E9D96045C019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD6175E2-73CC-4CCD-A7D1-44A6A5403DBF} = {6992AED5-5568-4FDA-917B-C314016FAF90}
+		{AD07B6E0-EDA0-4436-86B1-E33C0E0A959A} = {6992AED5-5568-4FDA-917B-C314016FAF90}
+		{19BCE8B3-3CD6-4D79-B564-E9D96045C019} = {6992AED5-5568-4FDA-917B-C314016FAF90}
+		{BEEE10F0-7AE7-4A82-A6F4-97C4147B764C} = {6992AED5-5568-4FDA-917B-C314016FAF90}
+	EndGlobalSection
+EndGlobal
