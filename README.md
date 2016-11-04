@@ -2,9 +2,16 @@
 通过grpc实现微服务，在Centos 7、docker中进行测试，hosting grpc 服务
 测试时，防火墙需要开放相应端口
 
-1.Grpc 在.net core中微服务
-2.
-  部署过程
+1.配置packages\Grpc.Tools\1.0.0\tools\windows_x64\protoc.exe环境变量
+开始运行cmd,转到 App.RPCDemo\proto 目录运行
+--plugin=protoc-gen-grpc 值为grpc_csharp_plugin.exe文件的路径
+
+protoc.exe --csharp_out=d:\grpcdemo\code\ --grpc_out=d:\grpcdemo\code\ --plugin=protoc-gen-grpc=C:\Users\liuyuhua\.nuget\packages\Grpc.Tools\1.0.0\tools\windows_x64\grpc_csharp_plugin.exe result.proto
+protoc.exe --csharp_out=d:\grpcdemo\code\ --grpc_out=d:\grpcdemo\code\ --plugin=protoc-gen-grpc=C:\Users\liuyuhua\.nuget\packages\Grpc.Tools\1.0.0\tools\windows_x64\grpc_csharp_plugin.exe RPCDemoService.proto
+
+把生成的文件copy到App.RPCDemo工程下 
+
+2.部署过程
 
   App.RPCDemoServer 服务端，参数说明
   host:主机ip 地址，默认0.0.0.0
