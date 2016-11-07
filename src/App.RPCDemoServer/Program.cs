@@ -6,7 +6,7 @@ using App.RPC.Model;
 using Grpc.Core;
 using App.RPC.Service;
 using App.RPCDemoServer.Impl;
-using YCApp.RPCDemo;
+using App.RPCDemo;
 using System.Threading;
 using App.RPC.Core;
 

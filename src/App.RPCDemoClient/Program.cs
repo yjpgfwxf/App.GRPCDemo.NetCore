@@ -8,9 +8,9 @@ using Grpc.Core;
 using App.RPC.Service;
 
 using Newtonsoft.Json;
-using YCApp.RPCDemo;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using App.RPCDemo;
 
 namespace YCApp.RPCDemoClient
 {
