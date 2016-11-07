@@ -99,49 +99,39 @@ namespace App.ThriftDemoClient
                     length = Convert.ToInt64(dic["repeat"]);
                 }
 
-                //issue tests on separate threads simultaneously
-                Thread[] threads = new Thread[numThreads];
-                DateTime start = DateTime.Now;
-                for (int test = 0; test < numThreads; test++)
+
+                if (url == null)
                 {
-                    Thread t = new Thread(new ParameterizedThreadStart(ClientThread));
-                    threads[test] = t;
-                    if (url == null)
-                    {
-                        // endpoint transport
-                        TTransport trans = null;
-                        if (pipe != null)
-                            trans = new TNamedPipeClientTransport(pipe);
-                        else
-                        {
-                            if (encrypted)
-                                trans = new TTLSSocket(host, port, certPath);
-                            else
-                                trans = new TSocket(host, port);
-                        }
-
-                        // layered transport
-                        if (buffered)
-                            trans = new TBufferedTransport(trans as TStreamTransport);
-                        if (framed)
-                            trans = new TFramedTransport(trans);
-
-                        //ensure proper open/close of transport
-                        trans.Open();
-                        t.Start(trans);
-                    }
+                    // endpoint transport
+                    TTransport trans = null;
+                    if (pipe != null)
+                        trans = new TNamedPipeClientTransport(pipe);
                     else
                     {
-                        THttpClient http = new THttpClient(new Uri(url));
-                        t.Start(http);
+                        if (encrypted)
+                            trans = new TTLSSocket(host, port, certPath);
+                        else
+                            trans = new TSocket(host, port);
                     }
+
+                    // layered transport
+                    if (buffered)
+                        trans = new TBufferedTransport(trans as TStreamTransport);
+                    if (framed)
+                        trans = new TFramedTransport(trans);
+
+                    //ensure proper open/close of transport
+                    trans.Open();
+                    ClientThread(trans);
+                }
+                else
+                {
+                    THttpClient http = new THttpClient(new Uri(url));
+                    ClientThread(http);
                 }
 
-                for (int test = 0; test < numThreads; test++)
-                {
-                    //threads[test].Join();
-                }
-                Console.Write("Total time: " + (DateTime.Now - start));
+
+
             }
             catch (Exception outerEx)
             {
@@ -157,10 +147,9 @@ namespace App.ThriftDemoClient
         public static void ClientThread(object obj)
         {
             TTransport transport = (TTransport)obj;
-            for (int i = 0; i < numIterations; i++)
-            {
-                ClientTest(transport);
-            }
+
+            ClientTest(transport);
+
             transport.Close();
         }
 
