@@ -18,11 +18,9 @@ namespace YCApp.RPCDemoClient
     {
         public static void Main(string[] args)
         {
-
-         
-
-            string host = "127.0.0.1";
+            string host = "192.168.4.37";
             string port = "9007";
+            string type = "1";
             long length = 10;
             var dic = Common.GetArgs(args);
             if (dic != null && dic.Count > 0)
@@ -43,28 +41,48 @@ namespace YCApp.RPCDemoClient
                 {
                     length = Convert.ToInt64(tempLength);
                 }
+
+                if (dic.ContainsKey("type"))
+                {
+                    type = dic["type"];
+                }
             }
 
+            string address = string.Format("{0}:{1}", host, port);
+            switch (type)
+            {
+                case "2":
+                    Test.TestInstance(address, length);
+                    break;
+                case "3":
+                    Test.TestSingleton(address, length);
+                    break;
+                default:
+                    Execute(host, port, length);
+                    break;
+            }
+
+            Console.WriteLine("continue .....");
+            Console.ReadLine();
+        }
+
+        public static void Execute(string host, string port, long length)
+        {
             Channel channel = new Channel(string.Format("{0}:{1}", host, port), ChannelCredentials.Insecure);
             var client = new RPCDemoService.RPCDemoServiceClient(channel);
-            client.GetById(new DemoId() { Id = 6 });
-            for (var j = 0; j < 2; j++)
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < length; i++)
             {
-
-                var stopwatch = Stopwatch.StartNew();
-                for (var i = 0; i < length; i++)
-                {
-                    
-                    var reply = client.GetById(new DemoId() { Id = i });
-                    Console.WriteLine("receive" + JsonConvert.SerializeObject(reply));
-                }
-                stopwatch.Stop();
-
-                Console.WriteLine(string.Format("repeat={0}, time={1} Milliseconds, time/repeat={2}", length, stopwatch.ElapsedMilliseconds, stopwatch.ElapsedMilliseconds / (float)length));
-                Console.ReadKey();
+                var reply = client.GetById(new DemoId() { Id = i });
+                Console.WriteLine("receive" + JsonConvert.SerializeObject(reply));
             }
-            channel.ShutdownAsync().Wait();
+            stopwatch.Stop();
 
+            Console.WriteLine(string.Format("call GetById repeat={0}, time={1} Milliseconds, time/repeat={2}", length, stopwatch.ElapsedMilliseconds, stopwatch.ElapsedMilliseconds / (float)length));
+            Console.ReadKey();
+
+            channel.ShutdownAsync().Wait();
         }
     }
 }
