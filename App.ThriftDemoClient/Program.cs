@@ -17,11 +17,16 @@ namespace App.ThriftDemoClient
 
         private static int numIterations = 1;
         private static string protocol = "";
-        private static long length = 10;
+        private static long length = 1;
+        private static string type = "1";
+
 
         public static void Main(string[] args)
         {
             Execute(args);
+
+            Console.WriteLine("continue .....");
+            Console.ReadLine();
         }
 
 
@@ -34,8 +39,7 @@ namespace App.ThriftDemoClient
                 string url = null, pipe = null;
                 int numThreads = 1;
                 bool buffered = false, framed = false, encrypted = false;
-                string certPath = "../../../../../keys/server.pem";
-
+                string certPath = "";
 
                 var dic = Common.GetArgs(args);
 
@@ -99,39 +103,13 @@ namespace App.ThriftDemoClient
                     length = Convert.ToInt64(dic["repeat"]);
                 }
 
-
-                if (url == null)
+                if (dic.ContainsKey("type"))
                 {
-                    // endpoint transport
-                    TTransport trans = null;
-                    if (pipe != null)
-                        trans = new TNamedPipeClientTransport(pipe);
-                    else
-                    {
-                        if (encrypted)
-                            trans = new TTLSSocket(host, port, certPath);
-                        else
-                            trans = new TSocket(host, port);
-                    }
-
-                    // layered transport
-                    if (buffered)
-                        trans = new TBufferedTransport(trans as TStreamTransport);
-                    if (framed)
-                        trans = new TFramedTransport(trans);
-
-                    //ensure proper open/close of transport
-                    trans.Open();
-                    ClientThread(trans);
-                }
-                else
-                {
-                    THttpClient http = new THttpClient(new Uri(url));
-                    ClientThread(http);
+                    type = dic["type"];
                 }
 
 
-
+                ClientThread(host, port, certPath, url, pipe, encrypted, buffered, framed);
             }
             catch (Exception outerEx)
             {
@@ -144,31 +122,72 @@ namespace App.ThriftDemoClient
             return true;
         }
 
-        public static void ClientThread(object obj)
+        public static void ClientThread(string host, int port, string certPath, string url, string pipe, bool encrypted, bool buffered, bool framed)
         {
-            TTransport transport = (TTransport)obj;
-
-            ClientTest(transport);
-
-            transport.Close();
+           
+            switch (type)
+            {
+                case "2":
+                    Test.TestInstance(host, port, certPath, url, pipe, encrypted, buffered, framed, protocol, length);
+                    break;
+               // case "3":
+                    //Test.TestSingleton(transport, protocol, length);
+                    //break;
+                default:
+                    ClientTest(host, port, certPath, url, pipe, encrypted, buffered, framed);
+                    break;
+            }
+            //
         }
 
-        public static void ClientTest(TTransport transport)
+        public static void ClientTest(string host, int port, string certPath, string url, string pipe, bool encrypted, bool buffered, bool framed)
         {
+            TTransport trans = null;
+
+            if (url == null)
+            {
+                // endpoint transport
+
+                if (pipe != null)
+                    trans = new TNamedPipeClientTransport(pipe);
+                else
+                {
+                    if (encrypted)
+                        trans = new TTLSSocket(host, port, certPath);
+                    else
+                        trans = new TSocket(host, port);
+                }
+
+                // layered transport
+                if (buffered)
+                    trans = new TBufferedTransport(trans as TStreamTransport);
+                if (framed)
+                    trans = new TFramedTransport(trans);
+
+                //ensure proper open/close of transport
+                trans.Open();
+            }
+            else
+            {
+                trans = new THttpClient(new Uri(url));
+
+            }
+
+
             TProtocol proto;
             if (protocol == "compact")
-                proto = new TCompactProtocol(transport);
+                proto = new TCompactProtocol(trans);
             else if (protocol == "json")
-                proto = new TJSONProtocol(transport);
+                proto = new TJSONProtocol(trans);
             else
-                proto = new TBinaryProtocol(transport);
+                proto = new TBinaryProtocol(trans);
 
             RPCDemoService.Client client = new RPCDemoService.Client(proto);
             try
             {
-                if (!transport.IsOpen)
+                if (!trans.IsOpen)
                 {
-                    transport.Open();
+                    trans.Open();
                 }
             }
             catch (TTransportException ttx)
@@ -176,22 +195,19 @@ namespace App.ThriftDemoClient
                 Console.WriteLine("Connect failed: " + ttx.Message);
                 return;
             }
-            client.GetById(1);
-            for (var j = 0; j < 2; j++)
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < length; i++)
             {
 
-                var stopwatch = Stopwatch.StartNew();
-                for (var i = 0; i < length; i++)
-                {
-
-                    var reply = client.GetById(i);
-                    Console.WriteLine("receive" + JsonConvert.SerializeObject(reply));
-                }
-                stopwatch.Stop();
-
-                Console.WriteLine(string.Format("repeat={0}, time={1} Milliseconds, time/repeat={2}", length, stopwatch.ElapsedMilliseconds, stopwatch.ElapsedMilliseconds / (float)length));
-                Console.ReadKey();
+                var reply = client.GetById(i);
+                Console.WriteLine("receive" + JsonConvert.SerializeObject(reply));
             }
+            stopwatch.Stop();
+
+            Console.WriteLine(string.Format("repeat={0}, time={1} Milliseconds, time/repeat={2}", length, stopwatch.ElapsedMilliseconds, stopwatch.ElapsedMilliseconds / (float)length));
+            Console.ReadKey();
+
         }
     }
 }
