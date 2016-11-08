@@ -38,6 +38,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "thrift-netcore", "src\thrif
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.ThriftDemoClient", "src\App.ThriftDemoClient\App.ThriftDemoClient.xproj", "{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.RPC.Web", "src\App.RPC.Web\App.RPC.Web.xproj", "{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +98,6 @@ Global
 		{F232F021-FA07-49B7-9F22-AA5D9D06D2D0} = {6992AED5-5568-4FDA-917B-C314016FAF90}
 		{3F4BA11A-FF75-47C1-A3AB-1764B6C15691} = {F232F021-FA07-49B7-9F22-AA5D9D06D2D0}
 		{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC} = {9616D769-68E0-4041-96F3-32E664BFDDF1}
+		{182DC7EA-85B8-43E2-AAF0-6B7DCBADB371} = {6992AED5-5568-4FDA-917B-C314016FAF90}
 	EndGlobalSection
 EndGlobal
