@@ -36,7 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{F232F021-FA0
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "thrift-netcore", "src\thrift-netcore\thrift-netcore.xproj", "{3F4BA11A-FF75-47C1-A3AB-1764B6C15691}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.ThriftDemoClient", "App.ThriftDemoClient\App.ThriftDemoClient.xproj", "{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "App.ThriftDemoClient", "src\App.ThriftDemoClient\App.ThriftDemoClient.xproj", "{98893518-EFCE-4E6E-BAD9-DA0CE8EA06BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
