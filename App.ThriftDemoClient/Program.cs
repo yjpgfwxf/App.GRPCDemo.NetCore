@@ -130,9 +130,6 @@ namespace App.ThriftDemoClient
                 case "2":
                     Test.TestInstance(host, port, certPath, url, pipe, encrypted, buffered, framed, protocol, length);
                     break;
-               // case "3":
-                    //Test.TestSingleton(transport, protocol, length);
-                    //break;
                 default:
                     ClientTest(host, port, certPath, url, pipe, encrypted, buffered, framed);
                     break;
