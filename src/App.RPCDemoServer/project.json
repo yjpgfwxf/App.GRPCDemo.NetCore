@@ -7,7 +7,7 @@
   "dependencies": {
     "App.RPC.Core": "1.0.0-*",
     "App.RPCDemo": "1.0.0-*",
-    "Grpc.Core": "1.0.1-pre1",
+    "Grpc.Core": "1.0.1",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"

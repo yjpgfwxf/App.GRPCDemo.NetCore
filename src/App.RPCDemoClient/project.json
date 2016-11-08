@@ -6,7 +6,7 @@
 
   "dependencies": {
     "App.RPCDemo": "1.0.0-*",
-    "Grpc.Core": "1.0.1-pre1",
+    "Grpc.Core": "1.0.1",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-alpha1-22177",
     "Microsoft.NETCore.App": {
       "type": "platform",
