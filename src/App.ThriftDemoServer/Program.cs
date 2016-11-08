@@ -19,7 +19,7 @@ namespace App.ThriftDemoServer
         public static void Main(string[] args)
         {
             Execute(args);
-            Console.ReadLine();
+            
         }
 
         public static bool Execute(string[] args)
@@ -108,15 +108,9 @@ namespace App.ThriftDemoServer
                 else
                     serverEngine = new ThriftServer(demoProcessor, trans, new TTransportFactory(), proto);
 
-                // ThreadPool Server
-                // serverEngine = new TThreadPoolServer(testProcessor, tServerSocket);
-
-                // Threaded Server
-                // serverEngine = new TThreadedServer(testProcessor, tServerSocket);
-
                 //Server event handler
-                //TradeServerEventHandler serverEvents = new TradeServerEventHandler();
-                //serverEngine.setEventHandler(serverEvents);
+                TradeServiceEventHandler serverEvents = new TradeServiceEventHandler();
+                serverEngine.setEventHandler(serverEvents);
 
                
                 // Run it
@@ -128,8 +122,9 @@ namespace App.ThriftDemoServer
                     (compact ? " with compact protocol" : "") +
                     (json ? " with json protocol" : "") +
                     "...");
-                //serverEngine.Run();
-                serverEngine.Serve();
+
+                Console.WriteLine("Thrift Service started. Press Ctrl+C to shut down.");
+                (serverEngine as IServer).Start();
             }
             catch (Exception x)
             {
